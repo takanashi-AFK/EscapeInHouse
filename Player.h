@@ -25,20 +25,5 @@ public:
 	//開放
 	void Release() override;
 
-	/// <summary>
-	/// 2点を結ぶベクトルを求めて値を返す
-	/// </summary>
-	/// <param name="_vecA">始点</param>
-	/// <param name="_vecB">終点</param>
-	/// <returns>ベクトルAB</returns>
-	XMVECTOR CalucurateVector(XMVECTOR _vecA, XMVECTOR _vecB);
-
-	/// <summary>
-	/// 2点を結ぶベクトルを求めて値を返す
-	/// </summary>
-	/// <param name="_posA">始点</param>
-	/// <param name="_posB">終点</param>
-	/// <returns>ベクトルAB</returns>
-	XMVECTOR CalucurateVector(XMFLOAT3 _posA, XMFLOAT3 _posB);
 };
 
