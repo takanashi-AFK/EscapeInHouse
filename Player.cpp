@@ -94,38 +94,44 @@ void Player::CharacterMove(Transform* _transform)
 
 		//情報の初期化
 		XMVECTOR vDirZ = { 0,0,1,0 };
+		XMVECTOR vDirX = { 1,0,0,0 };
 		XMVECTOR vMoveZ = moveDirction_;
 		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
 		XMVECTOR vPos = XMLoadFloat3(&_transform->position_);
 		float speed = SPEED;
+		//float dot = 0.0f;
+
+		XMVECTOR vec = {0,0,0,0};
 
 		//動作実行
 		if (Input::IsKey(DIK_W)) { 
 			vPos += XMVectorScale(vMoveZ, speed);
-			//transform_.rotate_.y = 0;
+			vec = XMVectorScale(vMoveZ, speed);
 		}
 
 		if (Input::IsKey(DIK_A)) { 
 			vPos -= XMVectorScale(vMoveX, speed); 
-			//transform_.rotate_.y = -90;
+			vec = XMVectorScale(vMoveX, speed);
+
 		}
 		
 		if (Input::IsKey(DIK_S)) { 
-			vPos -= XMVectorScale(vMoveZ, speed); 
-			//transform_.rotate_.y = 180;
+			vPos -= XMVectorScale(vMoveZ, speed);
+			vec = XMVectorScale(vMoveZ, speed);
+
 		}
 		
 		if (Input::IsKey(DIK_D)) { 
 			vPos += XMVectorScale(vMoveX, speed);
-			//transform_.rotate_.y = 90;
+			vec = XMVectorScale(vMoveX, speed);
 
 		}
 
 		//オブジェクトの角度を変更
-		/*float dot = XMVectorGetX(XMVector3Dot(vDirZ, vPos));
+		float dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirX), XMVector3Normalize(vec)));
 		float radian = acos(dot);
 		float angle = XMConvertToDegrees(radian);
-		transform_.rotate_.y = angle;*/
+		transform_.rotate_.y = angle;
 
 		//結果を代入
 		XMStoreFloat3(&_transform->position_, vPos);
