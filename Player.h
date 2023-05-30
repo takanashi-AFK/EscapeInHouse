@@ -3,11 +3,16 @@
 
 class Player : public GameObject
 {
-	int hModel_;
-	int s = 1;
+	int hModel_;	//モデル番号
+
+	XMVECTOR dirction_;
+
+	//削除予定の変数
 	XMFLOAT3 camPosition_;
 	XMFLOAT3 camTarget_;
-	XMVECTOR dirction_;
+	int s = 1;
+
+
 
 public:
 	//コンストラクタ
@@ -26,9 +31,8 @@ public:
 	//開放
 	void Release() override;
 
-
 	/// <summary>
-	/// カメラの方向ベクトルを設定する
+	/// プレイヤーの移動方向ベクトルを設定する
 	/// </summary>
 	/// <param name="_dir">カメラの方向ベクトル</param>
 	void SetDirction(XMVECTOR _dir) { this->dirction_ = _dir; }

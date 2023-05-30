@@ -4,7 +4,7 @@
 
 #include "Engine/Camera.h"
 
-const float SPEED = 0.1f;
+const float SPEED = 0.1f;//移動速度
 
 
 //コンストラクタ
@@ -16,10 +16,10 @@ Player::Player(GameObject* parent)
 //初期化
 void Player::Initialize()
 {
-
 	//モデルデータのロード
 	hModel_ = Model::Load("Model/Character.fbx");
 	assert(hModel_ >= 0);
+
 
 	//カメラデータの取得
 	#if 0
@@ -27,7 +27,6 @@ void Player::Initialize()
 		
 	}
 	#endif
-
 
 	//仮カメラセット
 	camPosition_ = { 0.0f,3.0f,-5.0f };
