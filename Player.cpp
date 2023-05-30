@@ -20,7 +20,6 @@ void Player::Initialize()
 	hModel_ = Model::Load("Model/Character.fbx");
 	assert(hModel_ >= 0);
 
-
 	//カメラデータの取得
 	#if 0
 	{
@@ -33,7 +32,7 @@ void Player::Initialize()
 	camTarget_ = { 0.0f,0.0f,1.0f };
 
 	//カメラの方向ベクトルを取得
-	SetDirction(GetCamDirVector(camPosition_, camTarget_));
+	SetMoveDirction(GetCamDirVector(camPosition_, camTarget_));
 	Camera::SetPosition(camPosition_);
 	Camera::SetTarget(camTarget_);
 
@@ -88,30 +87,47 @@ void Player::Release()
 
 void Player::CharacterMove(Transform* _transform)
 {
-		//移動方向の切替処理
+		//移動方向の変換
 		if (IsChangeMoveDir()) {
-			//カメラの方向ベクトルを再取得
-			SetDirction(GetCamDirVector(camPosition_, camTarget_));
+			SetMoveDirction(GetCamDirVector(camPosition_, camTarget_));
 		}
 
-		XMVECTOR vMoveZ = dirction_;
-		XMVECTOR vMoveX = XMVector3TransformCoord(dirction_, XMMatrixRotationY(XMConvertToRadians(90)));
-
-		//向き方向ベクトルを取得
+		//情報の初期化
+		XMVECTOR vDirZ = { 0,0,1,0 };
+		XMVECTOR vMoveZ = moveDirction_;
+		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
 		XMVECTOR vPos = XMLoadFloat3(&_transform->position_);
-
-		//移動速度
 		float speed = SPEED;
 
-		//画面前方に移動
-		if (Input::IsKey(DIK_W)) { vPos += XMVectorScale(vMoveZ, speed); }
-		//画面右側に移動
-		if (Input::IsKey(DIK_A)) { vPos -= XMVectorScale(vMoveX, speed); }
-		//画面後方に移動
-		if (Input::IsKey(DIK_S)) { vPos -= XMVectorScale(vMoveZ, speed); }
-		//画面左側に移動
-		if (Input::IsKey(DIK_D)) { vPos += XMVectorScale(vMoveX, speed); }
+		//動作実行
+		if (Input::IsKey(DIK_W)) { 
+			vPos += XMVectorScale(vMoveZ, speed);
+			//transform_.rotate_.y = 0;
+		}
 
+		if (Input::IsKey(DIK_A)) { 
+			vPos -= XMVectorScale(vMoveX, speed); 
+			//transform_.rotate_.y = -90;
+		}
+		
+		if (Input::IsKey(DIK_S)) { 
+			vPos -= XMVectorScale(vMoveZ, speed); 
+			//transform_.rotate_.y = 180;
+		}
+		
+		if (Input::IsKey(DIK_D)) { 
+			vPos += XMVectorScale(vMoveX, speed);
+			//transform_.rotate_.y = 90;
+
+		}
+
+		//オブジェクトの角度を変更
+		/*float dot = XMVectorGetX(XMVector3Dot(vDirZ, vPos));
+		float radian = acos(dot);
+		float angle = XMConvertToDegrees(radian);
+		transform_.rotate_.y = angle;*/
+
+		//結果を代入
 		XMStoreFloat3(&_transform->position_, vPos);
 }
 
