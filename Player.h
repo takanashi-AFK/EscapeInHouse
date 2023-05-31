@@ -4,15 +4,12 @@
 class Player : public GameObject
 {
 	int hModel_;	//モデル番号
-
-	XMVECTOR moveDirction_;
-
+	XMVECTOR moveDirction_;	//移動方向
+	float dot;
 	//削除予定の変数
 	XMFLOAT3 camPosition_;
 	XMFLOAT3 camTarget_;
-	int s = 1;
-
-
+	int s = 0;
 
 public:
 	//コンストラクタ
@@ -58,11 +55,10 @@ public:
 	bool IsChangeMoveDir();
 
 
-	//必要な機能
+	//必要な機能・行動
 	/*
 	*	歩く
-	*	壁を認識する
-	*	アイテムを認識する
+	*	アイテムをしまう
 	*	アイテムを拾う
 	*	アイテムを使う
 	*	アイテムを捨てる

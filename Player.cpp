@@ -20,13 +20,6 @@ void Player::Initialize()
 	hModel_ = Model::Load("Model/Character.fbx");
 	assert(hModel_ >= 0);
 
-	//カメラデータの取得
-	#if 0
-	{
-		
-	}
-	#endif
-
 	//仮カメラセット
 	camPosition_ = { 0.0f,3.0f,-5.0f };
 	camTarget_ = { 0.0f,0.0f,1.0f };
@@ -36,6 +29,7 @@ void Player::Initialize()
 	Camera::SetPosition(camPosition_);
 	Camera::SetTarget(camTarget_);
 
+	dot = 0.0f;
 }
 
 //更新
@@ -44,27 +38,39 @@ void Player::Update()
 	//移動処理
 	CharacterMove(&transform_);
 
-	//カメラ
+	//仮カメラ
 	{
 		
 		if (Input::IsKeyDown(DIK_SPACE)) {
-			if (s > 2) { s = 0; }
+			if (s > 4) { s = 0; }
 			s++;
 		}
 
 		switch (s)
 		{
-		case 1:	
+		case 0:	//キャラクター背後
 			camPosition_ = { 0.0f,3.0f,-5.0f };
 			camTarget_ = { 0.0f,0.0f,1.0f };
 			break;
-		case 2:	
+		case 1:	//キャラクター正面
 			camPosition_ = { 0.0f,3.0f,5.0f };
 			camTarget_ = { 0.0f,0.0f,-1.0f };
 			break;
-		case 3:	
-			camPosition_ = { 10.0f,3.0f,-5.0f };
-			camTarget_ = { 0.0f,0.0f,1.0f };
+		case 2:	//キャラクター右側
+			camPosition_ = { 5.0f,3.0f,0.0f };
+			camTarget_ = { -1.0f,0.0f,0.0f };
+			break;
+		case 3://キャラクター左側
+			camPosition_ = { -5.0f,3.0f,0.0f };
+			camTarget_ = { 1.0f,0.0f,0.0f };
+			break;
+		case 4://キャラクター右前斜め
+			camPosition_ = { 5.0f,3.0f,-5.0f };
+			camTarget_ = { -1.0f,0.0f,1.0f };
+			break;
+		case 5://キャラクター左奥斜め
+			camPosition_ = { -5.0f,3.0f,5.0f };
+			camTarget_ = { 1.0f,0.0f,-1.0f };
 			break;
 		}
 		Camera::SetPosition(camPosition_);
@@ -92,43 +98,36 @@ void Player::CharacterMove(Transform* _transform)
 			SetMoveDirction(GetCamDirVector(camPosition_, camTarget_));
 		}
 
-		//情報の初期化
+		//情報の初期化&代入
 		XMVECTOR vDirZ = { 0,0,1,0 };
 		XMVECTOR vDirX = { 1,0,0,0 };
 		XMVECTOR vMoveZ = moveDirction_;
 		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
 		XMVECTOR vPos = XMLoadFloat3(&_transform->position_);
 		float speed = SPEED;
-		//float dot = 0.0f;
-
-		XMVECTOR vec = {0,0,0,0};
-
+		
 		//動作実行
 		if (Input::IsKey(DIK_W)) { 
 			vPos += XMVectorScale(vMoveZ, speed);
-			vec = XMVectorScale(vMoveZ, speed);
+			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirZ), vMoveZ));
 		}
 
 		if (Input::IsKey(DIK_A)) { 
 			vPos -= XMVectorScale(vMoveX, speed); 
-			vec = XMVectorScale(vMoveX, speed);
-
+			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirX), XMVector3Normalize(-XMVectorScale(vMoveX, speed))));
 		}
 		
 		if (Input::IsKey(DIK_S)) { 
 			vPos -= XMVectorScale(vMoveZ, speed);
-			vec = XMVectorScale(vMoveZ, speed);
-
+			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirZ), -vMoveZ));
 		}
 		
 		if (Input::IsKey(DIK_D)) { 
 			vPos += XMVectorScale(vMoveX, speed);
-			vec = XMVectorScale(vMoveX, speed);
-
+			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirX), XMVector3Normalize(XMVectorScale(vMoveX, speed))));
 		}
 
 		//オブジェクトの角度を変更
-		float dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirX), XMVector3Normalize(vec)));
 		float radian = acos(dot);
 		float angle = XMConvertToDegrees(radian);
 		transform_.rotate_.y = angle;
