@@ -28,11 +28,6 @@ Item::Item(GameObject* parent)
 
 void Item::Initialize()
 {
-	string fileNames[] = {"",""};
-
-	for (int i = 0; i < 10; i++) {
-		hModels[i] = Model::Load(fileNames[i]);
-	}
 }
 
 void Item::Update()
