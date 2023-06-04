@@ -20,6 +20,8 @@ void Player::Initialize()
 	hModel_ = Model::Load("Model/Character.fbx");
 	assert(hModel_ >= 0);
 
+	//transform_.rotate_.y = 450;
+
 	//仮カメラセット
 	camPosition_ = { 0.0f,3.0f,-5.0f };
 	camTarget_ = { 0.0f,0.0f,1.0f };
@@ -38,6 +40,9 @@ void Player::Update()
 	//移動処理
 	CharacterMove(&transform_);
 
+	//アイテムの処理
+	ItemRelated();
+	
 	//仮カメラ
 	{
 		
@@ -99,8 +104,8 @@ void Player::CharacterMove(Transform* _transform)
 		}
 
 		//情報の初期化&代入
-		XMVECTOR vDirZ = { 0,0,1,0 };
-		XMVECTOR vDirX = { 1,0,0,0 };
+		//XMVECTOR vDirZ = { 0,0,1,0 };
+		//XMVECTOR vDirX = { 1,0,0,0 };
 		XMVECTOR vMoveZ = moveDirction_;
 		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
 		XMVECTOR vPos = XMLoadFloat3(&_transform->position_);
@@ -109,26 +114,22 @@ void Player::CharacterMove(Transform* _transform)
 		//動作実行
 		if (Input::IsKey(DIK_W)) { 
 			vPos += XMVectorScale(vMoveZ, speed);
-			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirZ), vMoveZ));
 		}
 
 		if (Input::IsKey(DIK_A)) { 
 			vPos -= XMVectorScale(vMoveX, speed); 
-			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirX), XMVector3Normalize(-XMVectorScale(vMoveX, speed))));
 		}
 		
 		if (Input::IsKey(DIK_S)) { 
 			vPos -= XMVectorScale(vMoveZ, speed);
-			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirZ), -vMoveZ));
 		}
 		
 		if (Input::IsKey(DIK_D)) { 
 			vPos += XMVectorScale(vMoveX, speed);
-			dot = XMVectorGetX(XMVector3Dot(XMVector3Normalize(vDirX), XMVector3Normalize(XMVectorScale(vMoveX, speed))));
 		}
 
 		//オブジェクトの角度を変更
-		float radian = acos(dot);
+		float radian = 0.0f;
 		float angle = XMConvertToDegrees(radian);
 		transform_.rotate_.y = angle;
 
@@ -181,4 +182,26 @@ bool Player::IsChangeMoveDir()
 	}
 
 	return false;
+}
+
+void Player::ItemRelated()
+{
+	//アイテム取得処理
+	Inventory::GetItem();
+	//アイテム使用処理
+	Inventory::UseItem();
+	//アイテム放棄処理
+	Inventory::DropItem();
+}
+
+void Inventory::GetItem()
+{
+}
+
+void Inventory::UseItem()
+{
+}
+
+void Inventory::DropItem()
+{
 }
