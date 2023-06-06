@@ -125,6 +125,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseUI.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BillBoard.cpp" />
     <ClCompile Include="Engine\BoxCollider.cpp" />
@@ -151,6 +153,8 @@
     <ClCompile Include="PlayScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseUI.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BillBoard.h" />
     <ClInclude Include="Engine\BoxCollider.h" />
