@@ -22,7 +22,7 @@ struct ItemData {
 };
 
 Item::Item(GameObject* parent)
-	: GameObject(parent, "PlayScene"),hModels{}
+	: GameObject(parent, "PlayScene")
 {
 }
 

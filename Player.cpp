@@ -106,32 +106,57 @@ void Player::CharacterMove(Transform* _transform)
 		//情報の初期化&代入
 		//XMVECTOR vDirZ = { 0,0,1,0 };
 		//XMVECTOR vDirX = { 1,0,0,0 };
-		XMVECTOR vMoveZ = moveDirction_;
-		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
+		//XMVECTOR vMoveZ = moveDirction_;
 		XMVECTOR vPos = XMLoadFloat3(&_transform->position_);
+		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
+
+		float angle = atan2(XMVectorGetX(moveDirction_), XMVectorGetZ(moveDirction_));
+
+		if (Input::IsKey(DIK_A)) {
+			angle -= XMConvertToRadians(90);
+			XMVECTOR move = { 0,0,SPEED,0 };
+			vPos += XMVector3TransformCoord(move,XMMatrixRotationY(angle));
+		}
+
+		if (Input::IsKey(DIK_D)) {
+			angle -= XMConvertToRadians(270);
+			XMVECTOR move = { 0,0,SPEED,0 };
+			vPos += XMVector3TransformCoord(move, XMMatrixRotationY(angle));
+		}
+
+		if (Input::IsKey(DIK_W)) {
+			angle -= XMConvertToRadians(0);
+			XMVECTOR move = { 0,0,SPEED,0 };
+			vPos += XMVector3TransformCoord(move, XMMatrixRotationY(angle));
+		}
+
+		if (Input::IsKey(DIK_S)) {
+			angle -= XMConvertToRadians(180);
+			XMVECTOR move = { 0,0,SPEED,0 };
+			vPos += XMVector3TransformCoord(move, XMMatrixRotationY(angle));
+		}
+
 		float speed = SPEED;
 		
-		//動作実行
-		if (Input::IsKey(DIK_W)) { 
-			vPos += XMVectorScale(vMoveZ, speed);
-		}
+		////動作実行
+		//if (Input::IsKey(DIK_W)) { 
+		//	vPos += XMVectorScale(vMoveZ, speed);
+		//}
 
-		if (Input::IsKey(DIK_A)) { 
+		/*if (Input::IsKey(DIK_A)) { 
 			vPos -= XMVectorScale(vMoveX, speed); 
-		}
+		}*/
 		
-		if (Input::IsKey(DIK_S)) { 
+		/*if (Input::IsKey(DIK_S)) { 
 			vPos -= XMVectorScale(vMoveZ, speed);
-		}
+		}*/
 		
-		if (Input::IsKey(DIK_D)) { 
+		/*if (Input::IsKey(DIK_D)) { 
 			vPos += XMVectorScale(vMoveX, speed);
-		}
+		}*/
 
 		//オブジェクトの角度を変更
-		float radian = 0.0f;
-		float angle = XMConvertToDegrees(radian);
-		transform_.rotate_.y = angle;
+		transform_.rotate_.y = XMConvertToDegrees(angle);
 
 		//結果を代入
 		XMStoreFloat3(&_transform->position_, vPos);
