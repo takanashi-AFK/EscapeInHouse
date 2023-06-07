@@ -97,7 +97,7 @@ void Player::Release()
 
 void Player::CharacterMove(Transform* _transform)
 {
-		//ˆÚ“®•ûŒü‚Ì•ÏŠ·
+		//ƒJƒƒ‰•ûŒü‚Ì•ÏŠ·
 		if (IsChangeMoveDir()) {
 			SetMoveDirction(GetCamDirVector(camPosition_, camTarget_));
 		}
