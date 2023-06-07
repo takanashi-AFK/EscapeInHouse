@@ -31,7 +31,6 @@ void Player::Initialize()
 	Camera::SetPosition(camPosition_);
 	Camera::SetTarget(camTarget_);
 
-	dot = 0.0f;
 }
 
 //更新
@@ -104,62 +103,82 @@ void Player::CharacterMove(Transform* _transform)
 		}
 
 		//情報の初期化&代入
-		//XMVECTOR vDirZ = { 0,0,1,0 };
-		//XMVECTOR vDirX = { 1,0,0,0 };
-		//XMVECTOR vMoveZ = moveDirction_;
 		XMVECTOR vPos = XMLoadFloat3(&_transform->position_);
-		XMVECTOR vMoveX = XMVector3TransformCoord(moveDirction_, XMMatrixRotationY(XMConvertToRadians(90)));
+		float angle = atan2(XMVectorGetX(cameraDirction_), XMVectorGetZ(cameraDirction_));
 
-		float angle = atan2(XMVectorGetX(moveDirction_), XMVectorGetZ(moveDirction_));
+		//各入力時の処理
+		EachInputProsess(vPos, angle);
 
-		if (Input::IsKey(DIK_A)) {
-			angle -= XMConvertToRadians(90);
-			XMVECTOR move = { 0,0,SPEED,0 };
-			vPos += XMVector3TransformCoord(move,XMMatrixRotationY(angle));
-		}
-
-		if (Input::IsKey(DIK_D)) {
-			angle -= XMConvertToRadians(270);
-			XMVECTOR move = { 0,0,SPEED,0 };
-			vPos += XMVector3TransformCoord(move, XMMatrixRotationY(angle));
-		}
-
-		if (Input::IsKey(DIK_W)) {
-			angle -= XMConvertToRadians(0);
-			XMVECTOR move = { 0,0,SPEED,0 };
-			vPos += XMVector3TransformCoord(move, XMMatrixRotationY(angle));
-		}
-
-		if (Input::IsKey(DIK_S)) {
-			angle -= XMConvertToRadians(180);
-			XMVECTOR move = { 0,0,SPEED,0 };
-			vPos += XMVector3TransformCoord(move, XMMatrixRotationY(angle));
-		}
-
-		float speed = SPEED;
-		
-		////動作実行
-		//if (Input::IsKey(DIK_W)) { 
-		//	vPos += XMVectorScale(vMoveZ, speed);
-		//}
-
-		/*if (Input::IsKey(DIK_A)) { 
-			vPos -= XMVectorScale(vMoveX, speed); 
-		}*/
-		
-		/*if (Input::IsKey(DIK_S)) { 
-			vPos -= XMVectorScale(vMoveZ, speed);
-		}*/
-		
-		/*if (Input::IsKey(DIK_D)) { 
-			vPos += XMVectorScale(vMoveX, speed);
-		}*/
-
-		//オブジェクトの角度を変更
+		//モデルの向きを変更
+		if(InputAnyWASD())
 		transform_.rotate_.y = XMConvertToDegrees(angle);
 
 		//結果を代入
 		XMStoreFloat3(&_transform->position_, vPos);
+}
+
+void Player::EachInputProsess(XMVECTOR& _vec, float& _angle)
+{
+	//入力パターン一覧
+	/*
+	* W		{ angle = Degree 0
+	* WA	{ angle = Degree 45
+	* A		{ angle = Degree 90
+	* AS	{ angle = Degree 135
+	* S		{ angle = Degree 180
+	* SD	{ angle = Degree 225
+	* D		{ angel = Degree 270
+	* DW	{ angle = Degree 315
+	*
+	* ※問題点
+	* キーが２つ以上押された時に違う挙動に移らないようにするべき？
+	* 対応策
+	* キーが二つ以上押されていないかを確認する関数を用意
+	* ？？？
+	*/
+
+	//向きを代入
+	if (Input::IsKey(DIK_W)) {
+		if (Input::IsKey(DIK_A))
+			_angle -= XMConvertToRadians(45);
+		else if (Input::IsKey(DIK_D))
+			_angle -= XMConvertToRadians(315);
+		else
+			_angle -= XMConvertToRadians(0);
+	}
+	else if (Input::IsKey(DIK_A)) {
+		if (Input::IsKey(DIK_S))
+			_angle -= XMConvertToRadians(135);
+		else
+			_angle -= XMConvertToRadians(90);
+	}
+	else if (Input::IsKey(DIK_S)) {
+		if (Input::IsKey(DIK_D))
+			_angle -= XMConvertToRadians(225);
+		else
+			_angle -= XMConvertToRadians(180);
+	}
+	else if (Input::IsKey(DIK_D)) {
+		_angle -= XMConvertToRadians(270);
+	}
+
+	//WASDいずれかのキーが押されたとき
+	if (InputAnyWASD()) {
+		XMVECTOR move = { 0,0,SPEED,0 };
+		_vec += XMVector3TransformCoord(move, XMMatrixRotationY(_angle));
+	}
+
+}
+
+bool Player::InputAnyWASD()
+{
+	if (Input::IsKey(DIK_W) ||
+		Input::IsKey(DIK_A) ||
+		Input::IsKey(DIK_S) ||
+		Input::IsKey(DIK_D)) {
+		return true;
+	}
+	return false;
 }
 
 XMVECTOR Player::GetCamDirVector(XMFLOAT3 _camPosition, XMFLOAT3 _camTarget)
