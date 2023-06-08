@@ -39,9 +39,6 @@ void Player::Update()
 	//移動処理
 	CharacterMove(&transform_);
 
-	//アイテムの処理
-	ItemRelated();
-	
 	//仮カメラ
 	{
 		
@@ -137,6 +134,8 @@ void Player::EachInputProsess(XMVECTOR& _vec, float& _angle)
 	* ？？？
 	*/
 
+#if 0
+
 	//向きを代入
 	if (Input::IsKey(DIK_W)) {
 		if (Input::IsKey(DIK_A))
@@ -162,11 +161,20 @@ void Player::EachInputProsess(XMVECTOR& _vec, float& _angle)
 		_angle -= XMConvertToRadians(270);
 	}
 
+	
+#else
+	float degrry = Input::GetMouseMove().x;
+	_angle -= XMConvertToRadians(degrry / 10.0f);
+	//マウスによる方向取得
+	//transform_.rotate_.y += (MouseMove_.x / 10.0f);
+#endif
+
+
 	//WASDいずれかのキーが押されたとき
-	if (InputAnyWASD()) {
-		XMVECTOR move = { 0,0,SPEED,0 };
-		_vec += XMVector3TransformCoord(move, XMMatrixRotationY(_angle));
-	}
+		if (InputAnyWASD()) {
+			XMVECTOR move = { 0,0,SPEED,0 };
+			_vec += XMVector3TransformCoord(move, XMMatrixRotationY(_angle));
+		}
 
 }
 
@@ -226,26 +234,4 @@ bool Player::IsChangeMoveDir()
 	}
 
 	return false;
-}
-
-void Player::ItemRelated()
-{
-	//アイテム取得処理
-	Inventory::GetItem();
-	//アイテム使用処理
-	Inventory::UseItem();
-	//アイテム放棄処理
-	Inventory::DropItem();
-}
-
-void Inventory::GetItem()
-{
-}
-
-void Inventory::UseItem()
-{
-}
-
-void Inventory::DropItem()
-{
 }

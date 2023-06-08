@@ -1,25 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
 
-namespace Inventory
-{
-	/// <summary>
-	/// アイテムを取得する処理
-	/// </summary>
-	void GetItem();
-
-	/// <summary>
-	/// アイテムを使用する処理
-	/// </summary>
-	void UseItem();
-
-	/// <summary>
-	/// アイテムを放棄する処理
-	/// </summary>
-	void DropItem();
-}
-
-
 class Player : public GameObject
 {
 	int hModel_;	//モデル番号
@@ -86,13 +67,6 @@ public:
 	/// </summary>
 	/// <returns>変更して良ければtrue</returns>
 	bool IsChangeMoveDir();
-
-	/// <summary>
-	/// アイテム関連全般の処理
-	/// </summary>
-	void ItemRelated();
-
-	
 
 	//必要な機能・行動
 	/*
