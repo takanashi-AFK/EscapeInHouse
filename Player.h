@@ -1,14 +1,23 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include "Engine/Text.h"
 
-class A : public GameObject
+class Player : public GameObject
 {
-private:
-	int hModel_;
+	int hModel_;	//モデル番号
+	Text* pText;
+
+	XMVECTOR cameraDirction_;	//カメラ方向
+
+	//削除予定の変数
+	XMFLOAT3 camPosition_;
+	XMFLOAT3 camTarget_;
+	int s = 0;
+
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	A(GameObject* parent);
+	Player(GameObject* parent);
 
 	//初期化
 	void Initialize() override;

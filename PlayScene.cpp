@@ -1,7 +1,7 @@
 #include "PlayScene.h"
-#include "A.h"
-#include "B.h"
-
+#include "Player.h"
+#include "Stage.h"
+#include"Engine/Camera.h"
 //コンストラクタ
 PlayScene::PlayScene(GameObject * parent)
 	: GameObject(parent, "PlayScene")
@@ -11,8 +11,9 @@ PlayScene::PlayScene(GameObject * parent)
 //初期化
 void PlayScene::Initialize()
 {
-	Instantiate<A>(this);
-	Instantiate<B>(this);
+
+	Instantiate<Player>(this);
+	Instantiate<Stage>(this);
 }
 
 //更新
