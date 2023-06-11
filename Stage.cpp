@@ -45,19 +45,13 @@ Rect4 Stage::GetRect(XMFLOAT3 _center, float _widthSide, float _heightSide)
 	return(ret);
 }
 
-//bool Stage::IsInRect(Rect4 _r)
-//{
-//	XMFLOAT3 playerPos;
-//	Player* p = new Player;
-//	playerPos = p->GetPosition();
-//
-//	if (playerPos.x > _r.TL.x && playerPos.z < _r.TL.z &&
-//		playerPos.x < _r.TR.x && playerPos.z <_r.TR.z &&
-//		playerPos.x > _r.BL.x && playerPos.z > _r.BL.z &&
-//		playerPos.x < _r.BR.x && playerPos.z > _r.BR.z  ) {
-//		delete p;
-//		return true;
-//	}
-//	delete p;
-//	return false;
-//}
+bool Stage::IsInRect(XMFLOAT3 _pos,Rect4 _r)
+{
+	if (_pos.x > _r.TL.x && _pos.z < _r.TL.z &&
+		_pos.x < _r.TR.x && _pos.z <_r.TR.z &&
+		_pos.x > _r.BL.x && _pos.z > _r.BL.z &&
+		_pos.x < _r.BR.x && _pos.z > _r.BR.z  ) {
+		return true;
+	}
+	return false;
+}
