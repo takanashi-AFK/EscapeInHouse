@@ -36,5 +36,13 @@ public:
 	/// <returns></returns>
 	Rect4 GetRect(XMFLOAT3 _center, float _widthSide, float _heightSide);
 
+
+	/// <summary>
+	/// モデル内部にPlayerが入っているか確認する関数
+	/// </summary>
+	/// <param name="_r">モデルの4点 たいていはGetRect()になるでしょう</param>
+	/// <returns>入っているかいないか(bool)</returns>
+	bool IsInRect(Rect4 _r);
+
 };
 
