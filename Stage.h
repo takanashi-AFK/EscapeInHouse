@@ -42,7 +42,7 @@ public:
 	/// </summary>
 	/// <param name="_r">ƒ‚ƒfƒ‹‚Ì4“_ ‚½‚¢‚Ä‚¢‚ÍGetRect()‚É‚È‚é‚Å‚µ‚å‚¤</param>
 	/// <returns>“ü‚Á‚Ä‚¢‚é‚©‚¢‚È‚¢‚©(bool)</returns>
-	bool IsInRect(Rect4 _r);
+	bool IsInRect(XMFLOAT3 _pos,Rect4 _r);
 
 };
 
