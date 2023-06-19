@@ -4,11 +4,11 @@ class Button:public GameObject
 {
 private:
 	std::string name_;
-	XMFLOAT3 position_;
-	XMFLOAT3 imageSize_;
-	XMFLOAT3 imageScale_;
-	float x_,y_, scale_;
-	float posX1_, posX2_, posY1_, posY2_;
+	XMFLOAT3 position_;						//表示位置
+	XMFLOAT3 imageSize_;					//がぞうのサイズ
+	XMFLOAT3 imageScale_;					//画像の拡大率です。
+	float x_,y_, scale_;					//画像のサイズ（ピクセル）と大きさを指定
+	float posX1_, posX2_, posY1_, posY2_;	//画像の座標を示します
 
 public:
 	Button(GameObject* parent);
