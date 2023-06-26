@@ -1,0 +1,11 @@
+アイテム情報
+
+※このtxtファイル内のn行目以降にアイテム情報を記述することでアイテムを追加することが出来ます。
+
+itemdata
+
+itemName,itemType,ModelFileName,ImageFileName
+//////////////////////////////////////////////////////////////////////
+-(赤いボール,	Score,	Redball.fbx,	RedBall.png)
+-(青い箱,	Score,	BlueBox.fbx,	BlueBox.png)
+-(玄関の鍵,	Key,		Key.fbx,		Key.png)
