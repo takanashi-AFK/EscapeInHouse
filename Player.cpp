@@ -27,13 +27,7 @@ void Player::Initialize()
 
 	//transform_.rotate_.y = 450;
 
-	//仮カメラセット
-	camPosition_ = { 0.0f,3.0f,0.0f };
-	camTarget_ = { 0.0f,3.0f,0.0f };
 
-	//Camera::SetPosition(camPosition_);
-	//Camera::SetTarget(camTarget_);
-	//学校の環境でカメラセットできるか検証してみよう
 
 }
 
@@ -64,7 +58,7 @@ void Player::Draw()
 	Model::Draw(hModel_);
 	XMFLOAT3 stagePos = pStage->GetPosition();
 
-	Rect4 R = pStage->GetRect(stagePos, 10, 10);
+	Rect4 R = pStage->GetRect(stagePos, 10, 10);//Mayaのサイズで確認とれてる yellowfloorは10,10
 	//Debug::Log(GetPosition().x,true);
 	//Debug::Log(GetPosition().z,true);
 

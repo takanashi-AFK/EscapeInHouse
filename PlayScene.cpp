@@ -11,7 +11,13 @@ PlayScene::PlayScene(GameObject * parent)
 //初期化
 void PlayScene::Initialize()
 {
+	//仮カメラセット
+	XMFLOAT3 camPosition_ = { 0.0f,7.0f,-13.0f };
+	XMFLOAT3 camTarget_ = { 0.0f,1.0f,2.0f };
 
+	Camera::SetPosition(camPosition_);
+	Camera::SetTarget(camTarget_);
+	//学校の環境でカメラセットできるか検証してみよう
 	Instantiate<Player>(this);
 	Instantiate<Stage>(this);
 }
