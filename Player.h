@@ -13,6 +13,7 @@ class Player : public GameObject
 	XMFLOAT3 camPosition_;
 	XMFLOAT3 camTarget_;
 	int s = 0;
+	
 
 public:
 	//コンストラクタ

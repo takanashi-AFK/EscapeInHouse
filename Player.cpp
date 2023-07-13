@@ -1,4 +1,5 @@
 #include "Player.h"
+#include"Stage.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
 #include "Engine/Debug.h"
@@ -57,11 +58,18 @@ void Player::Update()
 //•`‰æ
 void Player::Draw()
 {
+
+	Stage* pStage = (Stage*)FindObject("Stage");
 	Model::SetTransform(hModel_, transform_);
 	Model::Draw(hModel_);
+	XMFLOAT3 stagePos = pStage->GetPosition();
 
-	Debug::Log(GetPosition().x,true);
-	Debug::Log(GetPosition().z,true);
+	Rect4 R = pStage->GetRect(stagePos, 10, 10);
+	//Debug::Log(GetPosition().x,true);
+	//Debug::Log(GetPosition().z,true);
+
+	if (pStage->IsInRect(transform_.position_,R))
+		Debug::Log("True", true);
 
 }
 

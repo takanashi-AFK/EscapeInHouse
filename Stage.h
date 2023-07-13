@@ -44,5 +44,6 @@ public:
 	/// <returns>“ü‚Á‚Ä‚¢‚é‚©‚¢‚È‚¢‚©(bool)</returns>
 	bool IsInRect(XMFLOAT3 _pos,Rect4 _r);
 
+
 };
 
