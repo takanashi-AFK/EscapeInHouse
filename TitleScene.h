@@ -6,24 +6,14 @@
 //テストシーンを管理するクラス
 class TitleScene : public GameObject
 {
-
-	XMFLOAT3 mousePos;		//この変数にマウスの座標を代入します。
-	bool is_same_position;	//同じ座標にいるときに発動します
 	Text* pText;			//マウスの位置を"試験的"に表示させています。
-
-	enum STATES {				//出現させる絵を変えるために使用します
-		APict = 0,
-		BPict,
-
-		MAX
-	};
-	int hPict_[STATES::MAX];
-	int state_;			//ステータスを変化させるときに使用します
-	
-	Button* btn;	//ボタンクラスのアドレス
 	const float imageY = 256;
 	const float imageX = 512;
 	float scaleX, scaleY;
+	XMFLOAT3 mousePos_;		//この変数にマウスの座標を代入します。
+
+	Button* btn = Instantiate<Button>(this);	//ボタンクラスのアドレス
+
 
 public:
 	//コンストラクタ

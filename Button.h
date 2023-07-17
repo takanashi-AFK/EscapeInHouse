@@ -1,17 +1,36 @@
 #pragma once
 #include "Engine/GameObject.h"
-class Button:public GameObject
+class Button : public GameObject
 {
-protected:
+private:
 	XMFLOAT3 position_;
 	float x_,y_, scaleX_,scaleY_;
 	float posX1_, posX2_, posY1_, posY2_;
 
+	XMFLOAT3 mousePos_;		//この変数にマウスの座標を代入します。
+			//マウスの位置を"試験的"に表示させています。
+
+	enum STATES {				//出現させる絵を変えるために使用します
+		APict = 0,
+		BPict,
+
+		MAX
+	};
+	int hPict_[STATES::MAX];
+	int state_;			//ステータスを変化させるときに使用します
+
+	
+
 public:
+
 	Button(GameObject* parent);
 
 	~Button();
 
+	void Initialize()override;
+	void Update()override;
+	void Draw()override;
+	void Release()override;
 
 	/// <summary>
 	///ボタンのポジションを入力してください。
@@ -34,5 +53,5 @@ public:
 	/// </summary>
 	/// <param name="_mouse">[XMFLOAT3型　マウスの座標X,Y,Z]</param>
 	/// <returns></returns>
-	bool ButtonIsHit(XMFLOAT3 _mouse);
+	bool ButtonIsHit(XMFLOAT3 _mousePos);
 };

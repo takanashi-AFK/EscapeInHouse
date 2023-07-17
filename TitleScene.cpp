@@ -7,42 +7,28 @@
 
 //コンストラクタ
 TitleScene::TitleScene(GameObject* parent)
-	: GameObject(parent, "TitleScene"),mousePos(0,0,0), pText(nullptr),scaleX(0.7),scaleY(0.7)
+	: GameObject(parent, "TitleScene"), pText(nullptr),scaleX(0.7),scaleY(0.7),mousePos_(0, 0, 0)
 {
 }
 
 //初期化
 void TitleScene::Initialize()
 {
-	//file name
-	std::string fileName[] = { "ButtonA_1.png","ButtonA_2.png" };
-	for (int l = 0; l < MAX; l++) {
-		hPict_[l] = Image::Load(fileName[l]);
-	}
-
-
 	XMFLOAT3 imgPosition_(0.0f, -0.5f, 0.0f); //ボタンのポジションをここに設定
+
 	btn->SetPosition(imgPosition_);
-	btn->ButtonSize(imageX,imageY,scaleX,scaleY);
-	pText = new Text;
-	pText->Initialize();
+	btn->ButtonSize(imageX, imageY, scaleX, scaleY);
+
 }
 
 //更新
 void TitleScene::Update()
 {
-	mousePos = Input::GetMousePosition();
-	//if ((mousePos.x >= 465) && (mousePos.x <= 812)
-	//	&&(mousePos.y >= 456) &&(mousePos.y <= 621)) {
-	//	is_same_position = true;
-	//}
-	if (btn->ButtonIsHit(mousePos))
+	mousePos_ = Input::GetMousePosition();
+
+	if (btn->ButtonIsHit(mousePos_)&&
+		(Input::IsMouseButton(0)))
 	{
-		//画像切り替え処理をここに
-		if (state_ < 2) { state_ = 0; }
-		state_++;
-
-
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_PLAY);
 	}
@@ -52,21 +38,9 @@ void TitleScene::Update()
 //描画
 void TitleScene::Draw()
 {
-	switch(state_)
-	{
-	case APict:
-		Image::SetTransform(hPict_[APict], transform_);
-		Image::Draw(hPict_[APict]);
-		break;
-
-	case BPict:
-		Image::SetTransform(hPict_[BPict], transform_);
-		Image::Draw(hPict_[BPict]);
-	}
-
-
-	pText->Draw(30, 30, (int)mousePos.x);
-	pText->Draw(90, 30, (int)mousePos.y);
+	btn->Draw();
+	//pText->Draw(30, 30, (int)mousePos_.x);
+	//pText->Draw(90, 30, (int)mousePos_.y);
 }
 
 //開放
