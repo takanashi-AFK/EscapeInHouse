@@ -3,10 +3,11 @@
 #include "Engine/SceneManager.h"
 #include "Engine/Image.h"
 #include "Engine/Input.h"
+#include "Button.h"
 
 //コンストラクタ
 TitleScene::TitleScene(GameObject* parent)
-	: GameObject(parent, "TitleScene"),mousePos(0,0,0), pText(nullptr)
+	: GameObject(parent, "TitleScene"),mousePos(0,0,0), pText(nullptr),scaleX(0.7),scaleY(0.7)
 {
 }
 
@@ -19,9 +20,10 @@ void TitleScene::Initialize()
 		hPict_[l] = Image::Load(fileName[l]);
 	}
 
-	transform_.scale_ = XMFLOAT3(0.7, 0.7, 0);
-	transform_.position_.y = -0.5f;
 
+	XMFLOAT3 imgPosition_(0.0f, -0.5f, 0.0f); //ボタンのポジションをここに設定
+	btn->SetPosition(imgPosition_);
+	btn->ButtonSize(imageX,imageY,scaleX,scaleY);
 	pText = new Text;
 	pText->Initialize();
 }
@@ -30,25 +32,21 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 	mousePos = Input::GetMousePosition();
-	if ((mousePos.x >= 465) && (mousePos.x <= 812)
-		&&(mousePos.y >= 456) &&(mousePos.y <= 621)) {
-		is_same_position = true;
-	}
-
-	if (is_same_position = true && Input::IsMouseButton(0)) {
+	//if ((mousePos.x >= 465) && (mousePos.x <= 812)
+	//	&&(mousePos.y >= 456) &&(mousePos.y <= 621)) {
+	//	is_same_position = true;
+	//}
+	if (btn->ButtonIsHit(mousePos))
+	{
 		//画像切り替え処理をここに
 		if (state_ < 2) { state_ = 0; }
 		state_++;
 
-		//
-		//ここから下にシーン変更を呼びます。
-		//
-
-		//ここで暗転をお願いします！！！！！
 
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
 		pSceneManager->ChangeScene(SCENE_ID_PLAY);
 	}
+
 }
 
 //描画

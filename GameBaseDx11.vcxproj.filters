@@ -1,39 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="01Engine">
-      <UniqueIdentifier>{e5fccdcb-f299-4448-bdb6-01fa28039576}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01Engine\Collider">
-      <UniqueIdentifier>{7f19ecfb-5d70-4d31-a1f7-c9dd14bad324}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01Engine\DirectX">
-      <UniqueIdentifier>{e56f8c9a-95a5-4ceb-b65f-5b8e572d087b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01Engine\GameObject">
-      <UniqueIdentifier>{b450e438-c939-4b05-b319-0e3c0b4a335c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01Engine\ResourceManager">
-      <UniqueIdentifier>{bedee914-5063-4c08-95bb-79c861b4969c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02Shader">
-      <UniqueIdentifier>{47a6a3f5-8cfd-436b-8d58-beccd108f3f3}</UniqueIdentifier>
-      <Extensions>hlsl</Extensions>
-    </Filter>
+    <FxCompile Include="Assets\Shader\BillBoard.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\Shader\Debug3D.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\Shader\Simple2D.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Assets\Shader\Simple3D.hlsl">
+      <Filter>02Shader</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
       <Filter>01Engine\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\SphereCollider.cpp">
+      <Filter>01Engine\Collider</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Collider.cpp">
       <Filter>01Engine\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\SphereCollider.cpp">
-      <Filter>01Engine\Collider</Filter>
+    <ClCompile Include="Engine\Camera.cpp">
+      <Filter>01Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameObject.cpp">
+      <Filter>01Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\RootObject.cpp">
+      <Filter>01Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Transform.cpp">
+      <Filter>01Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\BillBoard.cpp">
+      <Filter>01Engine\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Direct3D.cpp">
       <Filter>01Engine\DirectX</Filter>
@@ -50,16 +54,22 @@
     <ClCompile Include="Engine\Sprite.cpp">
       <Filter>01Engine\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Camera.cpp">
-      <Filter>01Engine\GameObject</Filter>
+    <ClCompile Include="Engine\Texture.cpp">
+      <Filter>01Engine\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\GameObject.cpp">
-      <Filter>01Engine\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\RootObject.cpp">
-      <Filter>01Engine\GameObject</Filter>
+    <ClCompile Include="BaseUI.cpp" />
+    <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Engine\Audio.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\CsvReader.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Debug.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Image.cpp">
@@ -68,52 +78,43 @@
     <ClCompile Include="Engine\Model.cpp">
       <Filter>01Engine\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Text.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\VFX.cpp">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClCompile>
     <ClCompile Include="Engine\Main.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
     <ClCompile Include="Engine\SceneManager.cpp">
       <Filter>01Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Texture.cpp">
-      <Filter>01Engine\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Transform.cpp">
-      <Filter>01Engine\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="Engine\Audio.cpp">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Text.cpp">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Debug.cpp">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\BillBoard.cpp">
-      <Filter>01Engine\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\VFX.cpp">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClCompile>
-<<<<<<< Updated upstream
-=======
-    <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Item.cpp" />
-    <ClCompile Include="BaseUI.cpp" />
-    <ClCompile Include="Button.cpp" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
       <Filter>01Engine\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\SphereCollider.h">
+      <Filter>01Engine\Collider</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Collider.h">
       <Filter>01Engine\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\SphereCollider.h">
-      <Filter>01Engine\Collider</Filter>
+    <ClInclude Include="Engine\Camera.h">
+      <Filter>01Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameObject.h">
+      <Filter>01Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\RootObject.h">
+      <Filter>01Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Transform.h">
+      <Filter>01Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\BillBoard.h">
+      <Filter>01Engine\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Direct3D.h">
       <Filter>01Engine\DirectX</Filter>
@@ -130,16 +131,22 @@
     <ClInclude Include="Engine\Sprite.h">
       <Filter>01Engine\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Camera.h">
-      <Filter>01Engine\GameObject</Filter>
+    <ClInclude Include="Engine\Texture.h">
+      <Filter>01Engine\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GameObject.h">
-      <Filter>01Engine\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\RootObject.h">
-      <Filter>01Engine\GameObject</Filter>
+    <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="BaseUI.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="Engine\Audio.h">
+      <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\CsvReader.h">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Debug.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Image.h">
@@ -148,55 +155,40 @@
     <ClInclude Include="Engine\Model.h">
       <Filter>01Engine\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Text.h">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\VFX.h">
+      <Filter>01Engine\ResourceManager</Filter>
+    </ClInclude>
     <ClInclude Include="Engine\Global.h">
       <Filter>01Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\SceneManager.h">
       <Filter>01Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Texture.h">
-      <Filter>01Engine\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Transform.h">
-      <Filter>01Engine\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScene.h" />
-    <ClInclude Include="Engine\Audio.h">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Text.h">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Debug.h">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\BillBoard.h">
-      <Filter>01Engine\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\VFX.h">
-      <Filter>01Engine\ResourceManager</Filter>
-    </ClInclude>
-<<<<<<< Updated upstream
-=======
-    <ClInclude Include="Inventory.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="BaseUI.h" />
-    <ClInclude Include="Button.h" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Assets\Shader\Simple2D.hlsl">
-      <Filter>02Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Assets\Shader\Simple3D.hlsl">
-      <Filter>02Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Assets\Shader\Debug3D.hlsl">
-      <Filter>02Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Assets\Shader\BillBoard.hlsl">
-      <Filter>02Shader</Filter>
-    </FxCompile>
+    <Filter Include="01Engine">
+      <UniqueIdentifier>{0d4e2b70-0d73-4223-a7d2-055e616397d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02Shader">
+      <UniqueIdentifier>{ab4257b9-8a83-48bb-b868-0d6d56cb4a8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NewFilter2">
+      <UniqueIdentifier>{448e07e5-bd1f-4911-940a-22d62ea550e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01Engine\Collider">
+      <UniqueIdentifier>{91f7be25-ff5c-4d8d-8cdd-d1f490af7557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01Engine\DirectX">
+      <UniqueIdentifier>{85abb82d-62e3-491b-b42a-ad47904c855c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01Engine\ResourceManager">
+      <UniqueIdentifier>{02eb825a-b167-43e4-bca8-956ed7c1aead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01Engine\GameObject">
+      <UniqueIdentifier>{1619da8b-62d3-4cc5-8c6e-8b31b68f75ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
