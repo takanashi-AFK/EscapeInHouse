@@ -75,6 +75,9 @@ bool Button::ButtonIsHit(XMFLOAT3 _mousePos)
 	}
 	
 
-	else{ return false; }
+	else
+	{ 
+		return false;
+	}
 }	//‰æ‘œØ‚è‘Ö‚¦ˆ—‚ğ‚±‚±‚É
 
