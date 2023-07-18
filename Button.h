@@ -1,57 +1,39 @@
-#pragma once
 #include "Engine/GameObject.h"
-class Button : public GameObject
+#include "Engine/Image.h"
+#include "Engine/Transform.h"
+
+
+//４点を格納する構造体
+struct Rect4
+{
+    XMFLOAT3 TL, TR, BL, BR;
+};
+
+class Button
+    :public GameObject
 {
 private:
-	XMFLOAT3 position_;
-	float x_,y_, scaleX_,scaleY_;
-	float posX1_, posX2_, posY1_, posY2_;
-
-	XMFLOAT3 mousePos_;		//この変数にマウスの座標を代入します。
-			//マウスの位置を"試験的"に表示させています。
-
-	enum STATES {				//出現させる絵を変えるために使用します
-		APict = 0,
-		BPict,
-
-		MAX
-	};
-	int hPict_[STATES::MAX];
-	int state_;			//ステータスを変化させるときに使用します
-
-	
-
+    int hPict_;  //画像handle
+    Rect4 rect_; //画像の頂点４つを入れる
 public:
+    //コンストラクタ
+    Button();
 
-	Button(GameObject* parent);
+    //初期化
+    void Initialize();
 
-	~Button();
+    //更新
+    void Update();
 
-	void Initialize()override;
-	void Update()override;
-	void Draw()override;
-	void Release()override;
+    // 描画
+    void Draw();
 
-	/// <summary>
-	///ボタンのポジションを入力してください。
-	/// </summary>
-	/// <param name="_position">[XMFLOAT3型 (x, y, z)]</param>
-	void SetPosition(XMFLOAT3 _position);
+    //開放
+    void Release();
 
-	/// <summary>
-	/// ボタンの画像サイズとscaleを入力してください。
-	/// スケールを変えていない場合はスケールX,スケールYに1と入力してください。
-	/// </summary>
-	/// <param name="_sizeX_">[float 縦のサイズ]</param>
-	/// <param name="_sizeY">[float横のサイズ]</param>
-	/// <param name="_scaleX_">[スケールX]</param>
-	/// <param name="_scaleY_">[スケールY]</param>
-	void ButtonSize(float _sizeX, float _sizeY, float _scaleX, float _scaleY);
+    //読み込まれた画像から各頂点を取得する
+    void SetRect(int _Picthandle);
 
-	/// <summary>
-	/// ボタンの位置とマウスの位置が同じであるとtrueが返されます。
-	/// </summary>
-	/// <param name="_mouse">[XMFLOAT3型　マウスの座標X,Y,Z]</param>
-	/// <returns></returns>
-	bool ButtonIsHit(XMFLOAT3 _mousePos);
+    //ボタンの範囲内にカーソルかあるかを判定する
+    bool isButton(XMFLOAT3 Mpos);
 };
