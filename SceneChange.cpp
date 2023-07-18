@@ -9,11 +9,14 @@
 SceneChange::SceneChange(GameObject* parent)
     :GameObject(parent, "SceneChange")
 {
+
+	//エフェクト画像配置配列を初期化 = nullptr
 	for (int i = 0; i < 32; i++) {
 		for (int j = 0; j < 18; j++) {
 			pChangeAnim[i][j] = nullptr;
 		}
 	}
+
 	animpts = 0;
 	nowFrame = 0;
 	fade_ = false;

@@ -23,26 +23,16 @@ void StartScene::Update()
 
 	//シーン移動演出(ボタンが押されたら)
 	if (Input::IsKeyDown(DIK_SPACE)) {
-		isChangeNow = true;
-		if (isChangeNow) {
-			//画像くるくる処理をする
-			pSC = Instantiate<SceneChange>(this);
-			pSC->SetFade(false);
-			pSC->ChangeScene(SCENE_ID_PLAY);
-			pSC->ModifySC(SC_LATTICE, 120);
-
-			//画像くるくる処理が終わった
-			
-		}
-		else {
-			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-			pSceneManager->ChangeScene(SCENE_ID_PLAY);
-
-		}
+		//画像くるくる処理をする
+		pSC = Instantiate<SceneChange>(this);
+		pSC->SetFade(false);
+		pSC->ChangeScene(SCENE_ID_PLAY);
+		pSC->ModifySC(SC_LATTICE, 120);
 	}
 	
-		
-
+	//プレイシーンに移動する処理
+	//SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+	//pSceneManager->ChangeScene(SCENE_ID_PLAY);
 
 }
 

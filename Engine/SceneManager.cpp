@@ -61,5 +61,8 @@ void SceneManager::Release()
 //シーン切り替え（実際に切り替わるのはこの次のフレーム）
 void SceneManager::ChangeScene(SCENE_ID next)
 {
+	//シーン遷移機能を追加
+
+	if(/*シーン遷移エフェクトが終わったら*/true)
 	nextSceneID_ = next;
 }
