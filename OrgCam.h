@@ -4,15 +4,15 @@
 
 //テストシーンを管理するクラス
 struct CAMERA_DATA {
-	XMFLOAT3 camPos_;//位置 
-	XMFLOAT3 camTarget_; // ちゅうしてん
+
 	Rect4 camArea_;
 	int camNumber;
 };
 class OrgCam : public GameObject
 {
 private:
-
+	XMFLOAT3 camPos_;//位置 
+	XMFLOAT3 camTarget_; // ちゅうしてん
 
 public:
 	//コンストラクタ

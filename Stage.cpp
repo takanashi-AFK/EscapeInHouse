@@ -9,10 +9,11 @@ Stage::Stage(GameObject* parent)
 
 void Stage::Initialize()
 {
-	hModel_ = Model::Load("YellowFloor.fbx");
+	hModel_ = Model::Load("Stage/LDKandJapanese.fbx");
 	assert(hModel_ >= 0);
 
 	transform_.position_ = { 0,0,0 };
+	transform_.rotate_.y = 180;
 }
 
 void Stage::Update()
