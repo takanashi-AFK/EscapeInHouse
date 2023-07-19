@@ -39,6 +39,8 @@ namespace Image
 		}
 	};
 
+	
+
 
 	//初期化
 	void Initialize();
@@ -90,7 +92,10 @@ namespace Image
 	XMMATRIX GetMatrix(int handle);
 
 	/// <summary>
-	/// 
+	///	イメージデータを読み込みます
 	/// </summary>
-	void GetImageData();
+	
+	float GetWidth();
+	float GetHeight();
+	
 }

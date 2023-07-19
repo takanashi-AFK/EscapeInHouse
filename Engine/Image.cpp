@@ -5,7 +5,9 @@
 namespace Image
 {
 	//ロード済みの画像データ一覧
-	std::vector<ImageData*>	_datas;
+	std::vector<ImageData*>	_datas; 
+	float w;
+	float h;
 
 	//初期化
 	void Initialize()
@@ -17,7 +19,6 @@ namespace Image
 	int Load(std::string fileName)
 	{
 		ImageData* pData = new ImageData;
-
 		//開いたファイル一覧から同じファイル名のものが無いか探す
 		bool isExist = false;
 		for (int i = 0; i < _datas.size(); i++)
@@ -58,6 +59,8 @@ namespace Image
 			}
 		}
 
+		w = pData->pSprite->GetWidth();
+		h = pData->pSprite->GetHeight();
 		//新たに追加
 		_datas.push_back(pData);
 
@@ -70,7 +73,7 @@ namespace Image
 		return handle;
 	}
 
-
+	
 
 	//描画
 	void Draw(int handle)
@@ -191,5 +194,12 @@ namespace Image
 		}
 		return _datas[handle]->transform.GetWorldMatrix();
 	}
+	float GetWidth()
+	{
+		return w;
+	}
+	float GetHeight()
+	{
+		return h;
+	}
 }
-

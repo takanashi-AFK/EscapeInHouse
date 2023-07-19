@@ -23,6 +23,8 @@ class Texture
 	ID3D11ShaderResourceView*	pTextureSRV_;		//シェーダーリソースビュー（テクスチャをシェーダーに送るためのもの）
 	XMFLOAT3					size_;				//画像ファイルのサイズ
 
+	float W;
+	float H;
 public:
 	Texture();
 	~Texture();
@@ -37,5 +39,8 @@ public:
 	ID3D11SamplerState* GetSampler() { return pSampleLinear_; }	//サンプラーの取得
 	ID3D11ShaderResourceView* GetSRV() { return pTextureSRV_; }	//シェーダーリソースビューの取得
 	XMFLOAT3 GetSize() { return size_; }	//画像サイズの取得
+
+	float GetWidth() { return W; }
+	float GetHeight() { return H; }
 };
 

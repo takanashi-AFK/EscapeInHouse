@@ -49,6 +49,9 @@ HRESULT Texture::Load(std::string fileName)
 	D3D11_TEXTURE2D_DESC texdec;
 	texdec.Width = imgWidth;
 	texdec.Height = imgHeight;
+
+	W = imgWidth;
+	H = imgHeight;
 	texdec.MipLevels = 1;
 	texdec.ArraySize = 1;
 	texdec.Format = DXGI_FORMAT_R8G8B8A8_UNORM;

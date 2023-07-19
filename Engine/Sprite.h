@@ -78,4 +78,7 @@ public:
 	//戻値：画像サイズ
 	XMFLOAT3 GetTextureSize() {	return pTexture_->GetSize();}
 
+
+	float GetWidth() { return pTexture_->GetWidth(); }
+	float GetHeight() { return pTexture_->GetHeight(); }
 };

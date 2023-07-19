@@ -15,9 +15,13 @@ class Button
 private:
     int hPict_;  //画像handle
     Rect4 rect_; //画像の頂点４つを入れる
+    float width;
+    float height;
+
+    
 public:
     //コンストラクタ
-    Button();
+    Button(GameObject* parent);
 
     //初期化
     void Initialize();
@@ -32,8 +36,8 @@ public:
     void Release();
 
     //読み込まれた画像から各頂点を取得する
-    void SetRect(int _Picthandle);
+    void SetRect(/*int _Picthandle*/);
 
     //ボタンの範囲内にカーソルかあるかを判定する
-    bool isButton(XMFLOAT3 Mpos);
+    bool IsButton(XMFLOAT3 Mpos);
 };

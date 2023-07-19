@@ -3,7 +3,6 @@
 #include "Engine/SceneManager.h"
 #include "Engine/Image.h"
 #include "Engine/Input.h"
-#include "Button.h"
 
 //コンストラクタ
 TitleScene::TitleScene(GameObject* parent)
@@ -14,11 +13,7 @@ TitleScene::TitleScene(GameObject* parent)
 //初期化
 void TitleScene::Initialize()
 {
-	XMFLOAT3 imgPosition_(0.0f, -0.5f, 0.0f); //ボタンのポジションをここに設定
-
-	btn->SetPosition(imgPosition_);
-	btn->ButtonSize(imageX, imageY, scaleX, scaleY);
-
+	btn->Initialize();
 }
 
 //更新
@@ -26,7 +21,7 @@ void TitleScene::Update()
 {
 	mousePos_ = Input::GetMousePosition();
 
-	if (btn->ButtonIsHit(mousePos_)&&
+	if (btn->IsButton(mousePos_)&&
 		(Input::IsMouseButton(0)))
 	{
 		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
