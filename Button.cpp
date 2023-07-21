@@ -38,10 +38,10 @@ void Button::Initialize() {
         //rect_.TR = { (width / 2 + transform_.position_.x) / 800,(height / 2 + transform_.position_.y) / 600,0 };
         //rect_.BL = { ( - width / 2 + transform_.position_.x) / 800,( - height / 2 + transform_.position_.y) / 600,0};
         //rect_.BR = { (width / 2 + transform_.position_.x) / 800,( - height / 2 + transform_.position_.y) / 600,0};
-        rect_.TL = { (-width / 2 + transform_.position_.x),(height / 2 + transform_.position_.y) ,0 };
-        rect_.TR = { (width / 2 + transform_.position_.x),(height / 2 + transform_.position_.y),0 };
-        rect_.BL = { (-width / 2 + transform_.position_.x),(-height / 2 + transform_.position_.y) ,0 };
-        rect_.BR = { (width / 2 + transform_.position_.x),(-height / 2 + transform_.position_.y) ,0 };
+        rect_.TL = { (-width / 2 + transform_.position_.x) /1200 ,(height / 2 + transform_.position_.y)  /720 ,0 };
+        rect_.TR = { (width / 2 + transform_.position_.x)  /1200 ,(height / 2 + transform_.position_.y)  /720 ,0 };
+        rect_.BL = { (-width / 2 + transform_.position_.x) /1200 ,(-height / 2 + transform_.position_.y) /720 ,0 };
+        rect_.BR = { (width / 2 + transform_.position_.x)  /1200 ,(-height / 2 + transform_.position_.y) /720 ,0 };
 
     };
 
