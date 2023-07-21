@@ -13,6 +13,8 @@ TitleScene::TitleScene(GameObject* parent)
 //‰Šú‰»
 void TitleScene::Initialize()
 {
+	pText = new Text;
+	pText->Initialize();
 	btn->Initialize();
 }
 
@@ -20,13 +22,16 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 	mousePos_ = Input::GetMousePosition();
+	btn->SetRect();
 
-	if (btn->IsButton(mousePos_)&&
-		(Input::IsMouseButton(0)))
-	{
-		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-		pSceneManager->ChangeScene(SCENE_ID_PLAY);
-	}
+	//‚±‚±‚©‚ç‰ºAHŽ–’†B
+
+	//if (btn->IsButton(mousePos_)&&
+	//	(Input::IsMouseButton(0)))
+	//{
+	//	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+	//	pSceneManager->ChangeScene(SCENE_ID_PLAY);
+	//}
 
 }
 
@@ -34,11 +39,12 @@ void TitleScene::Update()
 void TitleScene::Draw()
 {
 	btn->Draw();
-	//pText->Draw(30, 30, (int)mousePos_.x);
-	//pText->Draw(90, 30, (int)mousePos_.y);
+	pText->Draw(30, 30, (int)mousePos_.x);
+	pText->Draw(90, 30, (int)mousePos_.y);
 }
 
 //ŠJ•ú
 void TitleScene::Release()
 {
+	pText->Release();
 }

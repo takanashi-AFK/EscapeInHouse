@@ -27,6 +27,8 @@ namespace Image
 			if (_datas[i] != nullptr && _datas[i]->fileName == fileName)
 			{
 				pData->pSprite = _datas[i]->pSprite;
+				w = pData->pSprite->GetWidth();
+				h = pData->pSprite->GetHeight();
 				isExist = true;
 				break;
 			}
@@ -59,8 +61,7 @@ namespace Image
 			}
 		}
 
-		w = pData->pSprite->GetWidth();
-		h = pData->pSprite->GetHeight();
+
 		//V‚½‚É’Ç‰Á
 		_datas.push_back(pData);
 
