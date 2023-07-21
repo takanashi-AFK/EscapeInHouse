@@ -24,14 +24,12 @@ void TitleScene::Update()
 	mousePos_ = Input::GetMousePosition();
 	btn->SetRect();
 
-	//‚±‚±‚©‚ç‰ºAHŽ–’†B
-
-	//if (btn->IsButton(mousePos_)&&
-	//	(Input::IsMouseButton(0)))
-	//{
-	//	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	//	pSceneManager->ChangeScene(SCENE_ID_PLAY);
-	//}
+	if (btn->IsButton(mousePos_)&&
+		(Input::IsMouseButton(0)))
+	{
+		SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+		pSceneManager->ChangeScene(SCENE_ID_PLAY);
+	}
 
 }
 
