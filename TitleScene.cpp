@@ -23,7 +23,7 @@ void TitleScene::Update()
 {
 	mousePos_ = Input::GetMousePosition();
 	mousePos_.x = mousePos_.x/1200;
-	mousePos_.y = mousePos_.y / 720;
+	mousePos_.y = mousePos_.y/600;
 	btn->SetRect();
 
 	if (btn->IsButton(mousePos_)&&
